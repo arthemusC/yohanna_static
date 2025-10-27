@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Yohanna - Produtos Criativos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #bdc3c7 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            width: 232px;
+            height: auto;
+        }
+
+        .slogan {
+            font-size: 1.2rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Seção de Título */
+        .section-title {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin: 2rem 0 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Galeria em Mosaico */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background: #f0f0f0;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Seção de Marketplaces */
+        .marketplaces {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .marketplaces h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .marketplace-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .marketplace-btn {
+            position: relative;
+            padding: 2rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .marketplace-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .marketplace-btn:hover::before {
+            opacity: 1;
+        }
+
+        .marketplace-btn:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-mercadolivre {
+            background: linear-gradient(135deg, #FFE600 0%, #FFC800 100%);
+            box-shadow: 0 10px 30px rgba(255, 230, 0, 0.4);
+        }
+
+        .btn-shopee {
+            background: linear-gradient(135deg, #FF6634 0%, #EE4D2D 100%);
+            box-shadow: 0 10px 30px rgba(238, 77, 45, 0.4);
+        }
+
+        .btn-amazon {
+            background: linear-gradient(135deg, #FF9900 0%, #FF7700 100%);
+            box-shadow: 0 10px 30px rgba(255, 153, 0, 0.4);
+        }
+
+        .marketplace-icon {
+            font-size: 3rem;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .marketplace-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Carrossel de Provas Sociais */
+        .testimonials {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .testimonial-image {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            display: block;
+        }
+
+        .testimonial-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.2rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .carousel-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #667eea;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            margin-top: 4rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="media/logo.svg" alt="Logo Loja Yohanna" class="logo">
+            <p class="slogan">Envelopes para convites, caixas para Kit Ressaca, lembrancinhas divertidas e criativas</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Galeria de Produtos -->
+        <h2 class="section-title">Produtos</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="media/products/A.CXRESSAC1.jpg" alt="Caixa Ressaca 1" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/A.CXRESSAC2.jpg" alt="Caixa Ressaca 2" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/B.ALMOF1.jpg" alt="Almofada 1" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/B.ALMOF2.jpg" alt="Almofada 2" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/A.CXRESSAC3.jpg" alt="Caixa Ressaca 3" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/C.ENVABA1.jpg" alt="Envelope Aba 1" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/C.ENVABA2.jpg" alt="Envelope Aba 2" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/C.ENVABA4.jpg" alt="Envelope Aba 4" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/C.ENVABA3.jpg" alt="Envelope Aba 3" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/D.ENVLUVA1.jpg" alt="Envelope Luv 1" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/D.ENVLUV2.jpg" alt="Envelope Luv 2" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/D.ENVLUV3.jpg" alt="Envelope Luv 3" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/D.ENVLUVA4.jpg" alt="Envelope Luv 4" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/D.ENVLUVA5.jpg" alt="Envelope Luv 5" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/E.ENV151.jpg" alt="Envelope 15x15 1" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/E.ENV152.jpg" alt="Envelope 15x15 2" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/F.CX6D1.jpg" alt="Caixa 6D 1" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/F.CX6D2.jpg" alt="Caixa 6D 2" />
+            </div>
+            <div class="gallery-item">
+                <img src="media/products/F.CX6D3.jpg" alt="Caixa 6D 3" />
+            </div>
+        </div>
+
+        <!-- Seção de Marketplaces -->
+        <div class="marketplaces">
+            <h2>Encontre Nossos Produtos</h2>
+            <div class="marketplace-buttons">
+                <a href="https://lista.mercadolivre.com.br/_CustId_532593703" class="marketplace-btn btn-mercadolivre">
+                    <div class="marketplace-icon">🛒</div>
+                    <div class="marketplace-text">Mercado Livre</div>
+                </a>
+                <a href="https://shopee.com.br/loja_yohanna" class="marketplace-btn btn-shopee">
+                    <div class="marketplace-icon">🛍️</div>
+                    <div class="marketplace-text">Shopee</div>
+                </a>
+                <a href="https://www.amazon.com.br/s?me=ACBB1IY534LXP" class="marketplace-btn btn-amazon">
+                    <div class="marketplace-icon">📦</div>
+                    <div class="marketplace-text">Amazon</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Carrossel de Provas Sociais -->
+        <div class="testimonials">
+            <h2>O Que Nossos Clientes Dizem</h2>
+            <div class="carousel-container">
+                <div class="carousel" id="carousel">
+                    <div class="carousel-item">
+                        <img src="media/testimonials/1.jpg" alt="Avaliação de Cliente 1" class="testimonial-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="media/testimonials/2.jpg" alt="Avaliação de Cliente 2" class="testimonial-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="media/testimonials/3.jpg" alt="Avaliação de Cliente 3" class="testimonial-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="media/testimonials/4.jpg" alt="Avaliação de Cliente 4" class="testimonial-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="media/testimonials/5.jpg" alt="Avaliação de Cliente 5" class="testimonial-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="media/testimonials/6.jpg" alt="Avaliação de Cliente 6" class="testimonial-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="media/testimonials/7.jpg" alt="Avaliação de Cliente 7" class="testimonial-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="media/testimonials/8.jpg" alt="Avaliação de Cliente 8" class="testimonial-image">
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" onclick="prevSlide()">‹</button>
+                    <button class="carousel-btn" onclick="nextSlide()">›</button>
+                </div>
+                <div class="carousel-indicators" id="indicators"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Loja Yohanna. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Carrossel
+        let currentSlide = 0;
+        const carousel = document.getElementById('carousel');
+        const items = carousel.querySelectorAll('.carousel-item');
+        const indicatorsContainer = document.getElementById('indicators');
+        const totalSlides = items.length;
+
+        // Criar indicadores
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('div');
+            indicator.classList.add('indicator');
+            if (i === 0) indicator.classList.add('active');
+            indicator.onclick = () => goToSlide(i);
+            indicatorsContainer.appendChild(indicator);
+        }
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Atualizar indicadores
+            const indicators = indicatorsContainer.querySelectorAll('.indicator');
+            indicators.forEach((ind, idx) => {
+                ind.classList.toggle('active', idx === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Auto-play do carrossel
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
